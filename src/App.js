@@ -46,20 +46,21 @@ const Steps = () => {
       <p className="message">{`Step ${step}: ${messages[step - 1]}`}</p>
 
       <div className="buttons">
-        <button
-          onClick={decreaseStep}
-          style={{ backgroundColor: "#7950f2", color: "#fff" }}
-        >
-          Previous
-        </button>
-        <button
-          onClick={increaseStep}
-          style={{ backgroundColor: "#7950f2", color: "#fff" }}
-        >
-          Next
-        </button>
+        <Button onClick={decreaseStep}>⏮ Previous</Button>
+        <Button onClick={increaseStep}>Next ⏭</Button>
       </div>
     </div>
+  );
+};
+
+const Button = ({ onClick, children }) => {
+  return (
+    <button
+      onClick={onClick}
+      style={{ backgroundColor: "#7950f2", color: "#fff" }}
+    >
+      {children}
+    </button>
   );
 };
 
