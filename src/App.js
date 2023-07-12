@@ -8,21 +8,6 @@ const messages = [
 
 const App = () => {
   const [isOpen, setOpen] = useState(true);
-  const handleClose = () => {
-    setOpen((is) => !is);
-  };
-
-  return (
-    <div>
-      <button onClick={handleClose} className="close">
-        &times;
-      </button>
-      {isOpen && <Steps />}
-    </div>
-  );
-};
-
-const Steps = () => {
   const [step, setStep] = useState(1);
 
   const decreaseStep = () => {
@@ -36,6 +21,24 @@ const Steps = () => {
       setStep((s) => s + 1);
     }
   };
+
+  const handleClose = () => {
+    setOpen((is) => !is);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClose} className="close">
+        &times;
+      </button>
+      {isOpen && (
+        <Steps step={step} onPrevious={decreaseStep} onNext={increaseStep} />
+      )}
+    </div>
+  );
+};
+
+const Steps = ({ step, onPrevious, onNext }) => {
   return (
     <div className="steps">
       <div className="numbers">
@@ -46,8 +49,8 @@ const Steps = () => {
       <p className="message">{`Step ${step}: ${messages[step - 1]}`}</p>
 
       <div className="buttons">
-        <Button onClick={decreaseStep}>⏮ Previous</Button>
-        <Button onClick={increaseStep}>Next ⏭</Button>
+        <Button onClick={onPrevious}>⏮ Previous</Button>
+        <Button onClick={onNext}>Next ⏭</Button>
       </div>
     </div>
   );
